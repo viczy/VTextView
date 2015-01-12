@@ -22,7 +22,7 @@
 - (VTextView*)vTextView {
     if (!_vTextView) {
         _vTextView = [[VTextView alloc] initWithFrame:CGRectMake(0.f, 30.f, self.view.bounds.size.width, 200.f)];
-        _vTextView.editable = YES;
+        _vTextView.editable = NO;
         _vTextView.textImageMapping = [self getEmotionMap];
     }
     return _vTextView;
@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.vTextView];
-    self.vTextView.text = @"测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# ";
+    self.vTextView.text = @"测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# 测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# 测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# 测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# ";
 }
 
 - (void)didReceiveMemoryWarning {
