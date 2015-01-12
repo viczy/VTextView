@@ -42,11 +42,11 @@ static CGSize AttachmentRunDelegateGetSize(void *refCon) {
 }
 
 static CGFloat AttachmentRunDelegateGetAscent(void *refCon) {
-    return AttachmentRunDelegateGetSize(refCon).height-3.f;
+    return AttachmentRunDelegateGetSize(refCon).height-4.f;
 }
 
 static CGFloat AttachmentRunDelegateGetDescent(void *refCon) {
-    return 3.f;
+    return 4.f;
 }
 
 static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
@@ -488,6 +488,13 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 }
 
 #pragma mark - #View
+
+#pragma mark - Actions Public 
+
+- (CGFloat)getHeightWithText:(NSString*)text withFont:(UIFont*)font withWidth:(CGFloat)width {
+    CGFloat height = [self boundingHeightForWidth:width];
+    return height+font.lineHeight;
+}
 
 #pragma mark - Actions Private
 #pragma mark - Common & TextChanged
@@ -1002,11 +1009,16 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
                        forKey:(NSString*)kCTForegroundColorAttributeName];
     NSError *error;
     NSString *pattern = [NSString stringWithFormat:@"%@(.+?)%@",vAtDelimiter, @":"];
+    NSString *patternAnother = [NSString stringWithFormat:@"%@(.+?)%@",vAtDelimiter, @" "];;
     NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                             options:0
+                                                                               error:&error];
+    NSRegularExpression *regularAnother = [NSRegularExpression regularExpressionWithPattern:patternAnother
                                                                              options:0
                                                                                error:&error];
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:attributedStr];
     NSRange stringRange = NSMakeRange(0, attributedStr.length);
+
     [regular enumerateMatchesInString:[attributedStr string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         if (result.resultType == NSTextCheckingTypeRegularExpression) {
             NSRange subRange = [result rangeAtIndex:1];
@@ -1014,6 +1026,15 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
             [mutableAttributedString addAttributes:linkAttributes range:atRange];
         }
     }];
+
+    [regularAnother enumerateMatchesInString:[attributedStr string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        if (result.resultType == NSTextCheckingTypeRegularExpression) {
+            NSRange subRange = [result rangeAtIndex:1];
+            NSRange atRange = NSMakeRange(subRange.location-1, subRange.length+1);
+            [mutableAttributedString addAttributes:linkAttributes range:atRange];
+        }
+    }];
+
     return mutableAttributedString;
 }
 
@@ -1243,12 +1264,12 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 
     if (gesture.state==UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
 
-//        if (self.linkRange.length>0 && gesture.state == UIGestureRecognizerStateBegan) {
-//            NSTextCheckingResult *link = [self linkAtIndex:self.linkRange.location];
-//            [self setLinkRangeFromTextCheckerResults:link];
-//            gesture.enabled=NO;
-//            gesture.enabled=YES;
-//        }
+        if (self.linkRange.length>0 && gesture.state == UIGestureRecognizerStateBegan) {
+            NSTextCheckingResult *link = [self linkAtIndex:self.linkRange.location];
+            [self setLinkRangeFromTextCheckerResults:link];
+            gesture.enabled=NO;
+            gesture.enabled=YES;
+        }
 
         UIMenuController *menuController = [UIMenuController sharedMenuController];
         if ([menuController isMenuVisible]) {

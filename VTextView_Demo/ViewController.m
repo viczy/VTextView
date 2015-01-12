@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.vTextView];
-    self.vTextView.text = @"测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# 测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# 测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# 测试[高兴][生气],http://12345.com @住在这里: 当时#大幅度发# ";
+    self.vTextView.text = @"#iOS编程（第4版）#。美国Big Nerd Ranch的经典iOS开发教程，曾荣获Jolt生产力大奖。豆瓣链接 → http://t.cn/RZ5Q63F 亚马逊预售 → http://t.cn/RZXePhl [高兴][xkl转圈] http://v.youku.com @我是葛朗台小姐 [高兴][高兴][高兴][高兴][高兴]@我是葛朗台小姐:[高兴][高兴][高兴]😜😜😚😚😚😝😗";
 }
 
 - (void)didReceiveMemoryWarning {

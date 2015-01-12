@@ -36,5 +36,9 @@
 @property (nonatomic, weak) id <UITextInputDelegate> inputDelegate;
 @property (nonatomic, weak) id <VTextViewDelegate> delegate;
 
+//Height of text
+
+- (CGSize)getHeightWithText:(NSString*)text withFont:(UIFont*)font withMaxWidth:(CGFloat)width;
+
 
 @end
