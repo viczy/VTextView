@@ -1,2 +1,5 @@
 # VTextView
-a custom textview
+
+##INSTANSE
+
+`pod 'VTextView', :git => 'https://github.com/viczy/VTextView.git'`
