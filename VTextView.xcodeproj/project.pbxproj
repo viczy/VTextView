@@ -13,18 +13,26 @@
 		F92C77F51A6362110035C1C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C77F31A6362110035C1C6 /* Main.storyboard */; };
 		F92C77F71A6362110035C1C6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92C77F61A6362110035C1C6 /* Images.xcassets */; };
 		F92C77FA1A6362110035C1C6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F92C77F81A6362110035C1C6 /* LaunchScreen.xib */; };
-		F92C78061A6362110035C1C6 /* VTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78051A6362110035C1C6 /* VTextViewTests.m */; };
+		F92C78321A6364730035C1C6 /* drag_dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78111A6364730035C1C6 /* drag_dot@2x.png */; };
+		F92C78331A6364730035C1C6 /* loupe_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78121A6364730035C1C6 /* loupe_hi@2x.png */; };
+		F92C78341A6364730035C1C6 /* loupe_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78131A6364730035C1C6 /* loupe_lo@2x.png */; };
+		F92C78351A6364730035C1C6 /* loupe_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78141A6364730035C1C6 /* loupe_mask@2x.png */; };
+		F92C78361A6364730035C1C6 /* ranged_magnifier_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78151A6364730035C1C6 /* ranged_magnifier_hi@2x.png */; };
+		F92C78371A6364730035C1C6 /* ranged_magnifier_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78161A6364730035C1C6 /* ranged_magnifier_lo@2x.png */; };
+		F92C78381A6364730035C1C6 /* ranged_magnifier_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C78171A6364730035C1C6 /* ranged_magnifier_mask@2x.png */; };
+		F92C78391A6364730035C1C6 /* UIColor+VTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78191A6364730035C1C6 /* UIColor+VTextView.m */; };
+		F92C783A1A6364730035C1C6 /* UIImage+VTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C781B1A6364730035C1C6 /* UIImage+VTextView.m */; };
+		F92C783B1A6364730035C1C6 /* VCaretView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C781D1A6364730035C1C6 /* VCaretView.m */; };
+		F92C783C1A6364730035C1C6 /* VContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C781F1A6364730035C1C6 /* VContentView.m */; };
+		F92C783D1A6364730035C1C6 /* VLoupeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78211A6364730035C1C6 /* VLoupeView.m */; };
+		F92C783E1A6364730035C1C6 /* VMagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78231A6364730035C1C6 /* VMagnifierView.m */; };
+		F92C783F1A6364730035C1C6 /* VRangedMagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78251A6364730035C1C6 /* VRangedMagnifierView.m */; };
+		F92C78401A6364730035C1C6 /* VSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78271A6364730035C1C6 /* VSelectionView.m */; };
+		F92C78411A6364730035C1C6 /* VTextPostion.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C782A1A6364730035C1C6 /* VTextPostion.m */; };
+		F92C78421A6364730035C1C6 /* VTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C782C1A6364730035C1C6 /* VTextRange.m */; };
+		F92C78431A6364730035C1C6 /* VTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C782E1A6364730035C1C6 /* VTextView.m */; };
+		F92C78441A6364730035C1C6 /* VTextWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F92C78311A6364730035C1C6 /* VTextWindow.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F92C78001A6362110035C1C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F92C77DE1A6362110035C1C6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F92C77E51A6362110035C1C6;
-			remoteInfo = VTextView;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F92C77E61A6362110035C1C6 /* VTextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VTextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,20 +45,43 @@
 		F92C77F41A6362110035C1C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F92C77F61A6362110035C1C6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F92C77F91A6362110035C1C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F92C77FF1A6362110035C1C6 /* VTextViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VTextViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F92C78041A6362110035C1C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F92C78051A6362110035C1C6 /* VTextViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTextViewTests.m; sourceTree = "<group>"; };
+		F92C78111A6364730035C1C6 /* drag_dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drag_dot@2x.png"; sourceTree = "<group>"; };
+		F92C78121A6364730035C1C6 /* loupe_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loupe_hi@2x.png"; sourceTree = "<group>"; };
+		F92C78131A6364730035C1C6 /* loupe_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loupe_lo@2x.png"; sourceTree = "<group>"; };
+		F92C78141A6364730035C1C6 /* loupe_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loupe_mask@2x.png"; sourceTree = "<group>"; };
+		F92C78151A6364730035C1C6 /* ranged_magnifier_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ranged_magnifier_hi@2x.png"; sourceTree = "<group>"; };
+		F92C78161A6364730035C1C6 /* ranged_magnifier_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ranged_magnifier_lo@2x.png"; sourceTree = "<group>"; };
+		F92C78171A6364730035C1C6 /* ranged_magnifier_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ranged_magnifier_mask@2x.png"; sourceTree = "<group>"; };
+		F92C78181A6364730035C1C6 /* UIColor+VTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+VTextView.h"; sourceTree = "<group>"; };
+		F92C78191A6364730035C1C6 /* UIColor+VTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+VTextView.m"; sourceTree = "<group>"; };
+		F92C781A1A6364730035C1C6 /* UIImage+VTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+VTextView.h"; sourceTree = "<group>"; };
+		F92C781B1A6364730035C1C6 /* UIImage+VTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+VTextView.m"; sourceTree = "<group>"; };
+		F92C781C1A6364730035C1C6 /* VCaretView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCaretView.h; sourceTree = "<group>"; };
+		F92C781D1A6364730035C1C6 /* VCaretView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCaretView.m; sourceTree = "<group>"; };
+		F92C781E1A6364730035C1C6 /* VContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VContentView.h; sourceTree = "<group>"; };
+		F92C781F1A6364730035C1C6 /* VContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VContentView.m; sourceTree = "<group>"; };
+		F92C78201A6364730035C1C6 /* VLoupeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLoupeView.h; sourceTree = "<group>"; };
+		F92C78211A6364730035C1C6 /* VLoupeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLoupeView.m; sourceTree = "<group>"; };
+		F92C78221A6364730035C1C6 /* VMagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMagnifierView.h; sourceTree = "<group>"; };
+		F92C78231A6364730035C1C6 /* VMagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMagnifierView.m; sourceTree = "<group>"; };
+		F92C78241A6364730035C1C6 /* VRangedMagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRangedMagnifierView.h; sourceTree = "<group>"; };
+		F92C78251A6364730035C1C6 /* VRangedMagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRangedMagnifierView.m; sourceTree = "<group>"; };
+		F92C78261A6364730035C1C6 /* VSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSelectionView.h; sourceTree = "<group>"; };
+		F92C78271A6364730035C1C6 /* VSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSelectionView.m; sourceTree = "<group>"; };
+		F92C78281A6364730035C1C6 /* VTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTextAttachment.h; sourceTree = "<group>"; };
+		F92C78291A6364730035C1C6 /* VTextPostion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTextPostion.h; sourceTree = "<group>"; };
+		F92C782A1A6364730035C1C6 /* VTextPostion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTextPostion.m; sourceTree = "<group>"; };
+		F92C782B1A6364730035C1C6 /* VTextRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTextRange.h; sourceTree = "<group>"; };
+		F92C782C1A6364730035C1C6 /* VTextRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTextRange.m; sourceTree = "<group>"; };
+		F92C782D1A6364730035C1C6 /* VTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTextView.h; sourceTree = "<group>"; };
+		F92C782E1A6364730035C1C6 /* VTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTextView.m; sourceTree = "<group>"; };
+		F92C782F1A6364730035C1C6 /* VTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTextViewDelegate.h; sourceTree = "<group>"; };
+		F92C78301A6364730035C1C6 /* VTextWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTextWindow.h; sourceTree = "<group>"; };
+		F92C78311A6364730035C1C6 /* VTextWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTextWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F92C77E31A6362110035C1C6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F92C77FC1A6362110035C1C6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -63,8 +94,8 @@
 		F92C77DD1A6362110035C1C6 = {
 			isa = PBXGroup;
 			children = (
-				F92C77E81A6362110035C1C6 /* VTextView */,
-				F92C78021A6362110035C1C6 /* VTextViewTests */,
+				F92C77E81A6362110035C1C6 /* VTextView_Demo */,
+				F92C780F1A6364730035C1C6 /* Source */,
 				F92C77E71A6362110035C1C6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,12 +104,11 @@
 			isa = PBXGroup;
 			children = (
 				F92C77E61A6362110035C1C6 /* VTextView.app */,
-				F92C77FF1A6362110035C1C6 /* VTextViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F92C77E81A6362110035C1C6 /* VTextView */ = {
+		F92C77E81A6362110035C1C6 /* VTextView_Demo */ = {
 			isa = PBXGroup;
 			children = (
 				F92C77ED1A6362110035C1C6 /* AppDelegate.h */,
@@ -90,6 +120,7 @@
 				F92C77F81A6362110035C1C6 /* LaunchScreen.xib */,
 				F92C77E91A6362110035C1C6 /* Supporting Files */,
 			);
+			name = VTextView_Demo;
 			path = VTextView;
 			sourceTree = "<group>";
 		};
@@ -102,21 +133,52 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F92C78021A6362110035C1C6 /* VTextViewTests */ = {
+		F92C780F1A6364730035C1C6 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				F92C78051A6362110035C1C6 /* VTextViewTests.m */,
-				F92C78031A6362110035C1C6 /* Supporting Files */,
+				F92C78101A6364730035C1C6 /* Resource */,
+				F92C78181A6364730035C1C6 /* UIColor+VTextView.h */,
+				F92C78191A6364730035C1C6 /* UIColor+VTextView.m */,
+				F92C781A1A6364730035C1C6 /* UIImage+VTextView.h */,
+				F92C781B1A6364730035C1C6 /* UIImage+VTextView.m */,
+				F92C781C1A6364730035C1C6 /* VCaretView.h */,
+				F92C781D1A6364730035C1C6 /* VCaretView.m */,
+				F92C781E1A6364730035C1C6 /* VContentView.h */,
+				F92C781F1A6364730035C1C6 /* VContentView.m */,
+				F92C78201A6364730035C1C6 /* VLoupeView.h */,
+				F92C78211A6364730035C1C6 /* VLoupeView.m */,
+				F92C78221A6364730035C1C6 /* VMagnifierView.h */,
+				F92C78231A6364730035C1C6 /* VMagnifierView.m */,
+				F92C78241A6364730035C1C6 /* VRangedMagnifierView.h */,
+				F92C78251A6364730035C1C6 /* VRangedMagnifierView.m */,
+				F92C78261A6364730035C1C6 /* VSelectionView.h */,
+				F92C78271A6364730035C1C6 /* VSelectionView.m */,
+				F92C78281A6364730035C1C6 /* VTextAttachment.h */,
+				F92C78291A6364730035C1C6 /* VTextPostion.h */,
+				F92C782A1A6364730035C1C6 /* VTextPostion.m */,
+				F92C782B1A6364730035C1C6 /* VTextRange.h */,
+				F92C782C1A6364730035C1C6 /* VTextRange.m */,
+				F92C782D1A6364730035C1C6 /* VTextView.h */,
+				F92C782E1A6364730035C1C6 /* VTextView.m */,
+				F92C782F1A6364730035C1C6 /* VTextViewDelegate.h */,
+				F92C78301A6364730035C1C6 /* VTextWindow.h */,
+				F92C78311A6364730035C1C6 /* VTextWindow.m */,
 			);
-			path = VTextViewTests;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		F92C78031A6362110035C1C6 /* Supporting Files */ = {
+		F92C78101A6364730035C1C6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				F92C78041A6362110035C1C6 /* Info.plist */,
+				F92C78111A6364730035C1C6 /* drag_dot@2x.png */,
+				F92C78121A6364730035C1C6 /* loupe_hi@2x.png */,
+				F92C78131A6364730035C1C6 /* loupe_lo@2x.png */,
+				F92C78141A6364730035C1C6 /* loupe_mask@2x.png */,
+				F92C78151A6364730035C1C6 /* ranged_magnifier_hi@2x.png */,
+				F92C78161A6364730035C1C6 /* ranged_magnifier_lo@2x.png */,
+				F92C78171A6364730035C1C6 /* ranged_magnifier_mask@2x.png */,
 			);
-			name = "Supporting Files";
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,24 +201,6 @@
 			productReference = F92C77E61A6362110035C1C6 /* VTextView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F92C77FE1A6362110035C1C6 /* VTextViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F92C780C1A6362110035C1C6 /* Build configuration list for PBXNativeTarget "VTextViewTests" */;
-			buildPhases = (
-				F92C77FB1A6362110035C1C6 /* Sources */,
-				F92C77FC1A6362110035C1C6 /* Frameworks */,
-				F92C77FD1A6362110035C1C6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F92C78011A6362110035C1C6 /* PBXTargetDependency */,
-			);
-			name = VTextViewTests;
-			productName = VTextViewTests;
-			productReference = F92C77FF1A6362110035C1C6 /* VTextViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,10 +212,6 @@
 				TargetAttributes = {
 					F92C77E51A6362110035C1C6 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					F92C77FE1A6362110035C1C6 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = F92C77E51A6362110035C1C6;
 					};
 				};
 			};
@@ -189,7 +229,6 @@
 			projectRoot = "";
 			targets = (
 				F92C77E51A6362110035C1C6 /* VTextView */,
-				F92C77FE1A6362110035C1C6 /* VTextViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,16 +238,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F92C78321A6364730035C1C6 /* drag_dot@2x.png in Resources */,
+				F92C78361A6364730035C1C6 /* ranged_magnifier_hi@2x.png in Resources */,
+				F92C78341A6364730035C1C6 /* loupe_lo@2x.png in Resources */,
+				F92C78371A6364730035C1C6 /* ranged_magnifier_lo@2x.png in Resources */,
+				F92C78381A6364730035C1C6 /* ranged_magnifier_mask@2x.png in Resources */,
 				F92C77F51A6362110035C1C6 /* Main.storyboard in Resources */,
 				F92C77FA1A6362110035C1C6 /* LaunchScreen.xib in Resources */,
 				F92C77F71A6362110035C1C6 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F92C77FD1A6362110035C1C6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				F92C78351A6364730035C1C6 /* loupe_mask@2x.png in Resources */,
+				F92C78331A6364730035C1C6 /* loupe_hi@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,29 +258,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F92C78391A6364730035C1C6 /* UIColor+VTextView.m in Sources */,
+				F92C783B1A6364730035C1C6 /* VCaretView.m in Sources */,
 				F92C77F21A6362110035C1C6 /* ViewController.m in Sources */,
+				F92C78401A6364730035C1C6 /* VSelectionView.m in Sources */,
+				F92C78411A6364730035C1C6 /* VTextPostion.m in Sources */,
+				F92C78441A6364730035C1C6 /* VTextWindow.m in Sources */,
+				F92C783C1A6364730035C1C6 /* VContentView.m in Sources */,
+				F92C783A1A6364730035C1C6 /* UIImage+VTextView.m in Sources */,
+				F92C78421A6364730035C1C6 /* VTextRange.m in Sources */,
+				F92C783F1A6364730035C1C6 /* VRangedMagnifierView.m in Sources */,
+				F92C783D1A6364730035C1C6 /* VLoupeView.m in Sources */,
+				F92C78431A6364730035C1C6 /* VTextView.m in Sources */,
 				F92C77EF1A6362110035C1C6 /* AppDelegate.m in Sources */,
 				F92C77EC1A6362110035C1C6 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F92C77FB1A6362110035C1C6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F92C78061A6362110035C1C6 /* VTextViewTests.m in Sources */,
+				F92C783E1A6364730035C1C6 /* VMagnifierView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F92C78011A6362110035C1C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F92C77E51A6362110035C1C6 /* VTextView */;
-			targetProxy = F92C78001A6362110035C1C6 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F92C77F31A6362110035C1C6 /* Main.storyboard */ = {
@@ -359,40 +394,6 @@
 			};
 			name = Release;
 		};
-		F92C780D1A6362110035C1C6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = VTextViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VTextView.app/VTextView";
-			};
-			name = Debug;
-		};
-		F92C780E1A6362110035C1C6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = VTextViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VTextView.app/VTextView";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -412,14 +413,7 @@
 				F92C780B1A6362110035C1C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		F92C780C1A6362110035C1C6 /* Build configuration list for PBXNativeTarget "VTextViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F92C780D1A6362110035C1C6 /* Debug */,
-				F92C780E1A6362110035C1C6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
