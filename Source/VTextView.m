@@ -1031,7 +1031,13 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
         if (result.resultType == NSTextCheckingTypeRegularExpression) {
             NSRange subRange = [result rangeAtIndex:1];
             NSRange atRange = NSMakeRange(subRange.location-1, subRange.length+1);
-            [mutableAttributedString addAttributes:linkAttributes range:atRange];
+            //排除regular
+            NSString *subString = [[mutableAttributedString string] substringWithRange:atRange];
+            NSInteger regularCount = [regular numberOfMatchesInString:subString options:0 range:NSMakeRange(0, subString.length)];
+            //如果regular不包含在regularAnother中，修改，否则跳过
+            if (!regularCount > 0) {
+                [mutableAttributedString addAttributes:linkAttributes range:atRange];
+            }
         }
     }];
 
