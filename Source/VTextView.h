@@ -40,5 +40,7 @@
 
 - (CGSize)getHeightWithText:(NSString*)text withFont:(UIFont*)font withMaxWidth:(CGFloat)width;
 
+//表情键盘，@xxx，#xxxxx#,插入使用： - (void)insertText:(NSString *)text；
+
 
 @end

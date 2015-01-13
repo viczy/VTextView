@@ -19,6 +19,7 @@
 #import "VTextRange.h"
 #import "VSelectionView.h"
 #import "VTextWindow.h"
+#import "UIImage+VTextView.h"
 
 static NSString *const vLeftDelimiter = @"\\[";
 static NSString *const vRightDelimiter = @"\\]";
@@ -27,31 +28,7 @@ static NSString *const vTopicDelimiter = @"#";
 static NSString *const vTextAttachmentAttributeName = @"com.everycode.vTextAttachmentAttribute";
 static NSString *const vTextAttachmentPlaceholderString = @"\ufffc";
 static NSString *const vTextAttachmentOriginStringKey = @"com.everycode.vTextAttachmentOriginString";
-
-static void AttachmentRunDelegateDealloc(void *refCon) {
-//    CFBridgingRelease(refCon);
-}
-
-static CGSize AttachmentRunDelegateGetSize(void *refCon) {
-    id <VTextAttachment> attachment = (__bridge id<VTextAttachment>)(refCon);
-    if ([attachment respondsToSelector: @selector(attachmentSize)]) {
-        return [attachment attachmentSize];
-    } else {
-        return [[attachment attachmentView] frame].size;
-    }
-}
-
-static CGFloat AttachmentRunDelegateGetAscent(void *refCon) {
-    return AttachmentRunDelegateGetSize(refCon).height-4.f;
-}
-
-static CGFloat AttachmentRunDelegateGetDescent(void *refCon) {
-    return 4.f;
-}
-
-static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
-    return AttachmentRunDelegateGetSize(refCon).width;
-}
+static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentLink";
 
 @interface VTextView () <
     ContentViewDelegate,
@@ -79,6 +56,8 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 @property (nonatomic, strong) VCaretView *caretView; //no getter
 @property (nonatomic, strong) VSelectionView *selectionView; //no getter
 @property (nonatomic, strong) VTextWindow *textWindow;
+
+@property (nonatomic, strong) NSMutableArray *linkRangeArray;
 
 - (void)common;
 - (void)textChanged;
@@ -718,7 +697,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
     if (self.linkRange.length>0) {
         BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectURL:)];
         if (respondUrl) {
-            [self.delegate respondsToSelector:@selector(vTextView:didSelectURL:)];
+            [self.delegate vTextView:self didSelectURL:results.URL];
         }
     }
     self.linkRange = NSMakeRange(NSNotFound, 0);
@@ -1126,7 +1105,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
     [linkDetector enumerateMatchesInString:[self.attributedString string] options:0 range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         if ([result resultType] == NSTextCheckingTypeLink) {
             *stop = YES;
-            link = link;
+            link = result;
         }
     }];
 
@@ -1272,12 +1251,12 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 
     if (gesture.state==UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
 
-        if (self.linkRange.length>0 && gesture.state == UIGestureRecognizerStateBegan) {
-            NSTextCheckingResult *link = [self linkAtIndex:self.linkRange.location];
-            [self setLinkRangeFromTextCheckerResults:link];
-            gesture.enabled=NO;
-            gesture.enabled=YES;
-        }
+//        if (self.linkRange.length>0 && gesture.state == UIGestureRecognizerStateBegan) {
+//            NSTextCheckingResult *link = [self linkAtIndex:self.linkRange.location];
+//            [self setLinkRangeFromTextCheckerResults:link];
+//            gesture.enabled=NO;
+//            gesture.enabled=YES;
+//        }
 
         UIMenuController *menuController = [UIMenuController sharedMenuController];
         if ([menuController isMenuVisible]) {
@@ -1406,9 +1385,11 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
     }
 
     NSInteger index = [self closestIndexToPoint:[gesture locationInView:self]];
-    BOOL respondUrl = YES;// [self.delegate respondsToSelector:@selector(vTextView:didSelectURL:)];
-    if (respondUrl && !_editing) {
+    BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectURL:)];
+    if (respondUrl && !_editable) {
         if ([self selectedLinkAtIndex:index]) {
+            NSTextCheckingResult *link = [self linkAtIndex:index];
+            [self setLinkRangeFromTextCheckerResults:link];
             return;
         }
     }
