@@ -1073,7 +1073,15 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
                                         NSRange httpRang = result.range;
                                         NSString *httpString = [attributedStr.string substringWithRange:httpRang];
                                         [linkAttributes setObject:httpString forKey:vTextAttachmentLinkKey];
-                                        [mutableAttributedString addAttributes:linkAttributes range:httpRang];
+
+                                        //replace the http-url
+                                        [linkAttributes setObject:httpString forKey:vTextAttachmentOriginStringKey];
+                                        NSAttributedString *newString = [[NSAttributedString alloc] initWithString:@"链"
+                                                                                                        attributes:linkAttributes];
+
+                                        [mutableAttributedString replaceCharactersInRange:[result resultByAdjustingRangesWithOffset:mutableAttributedString.length-attributedStr.length].range
+                                                                     withAttributedString:newString];
+                                        //[mutableAttributedString addAttributes:linkAttributes range:httpRang];
                                     }
                                 }];
 
