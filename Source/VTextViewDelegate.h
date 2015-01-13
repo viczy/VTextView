@@ -24,6 +24,6 @@
 
 - (void)vTextViewDidChangeSelection:(VTextView*)textView;
 
-- (void)vTextView:(VTextView*)textView didSelectURL:(NSURL*)URL;
+- (void)vTextView:(VTextView*)textView didSelectUrl:(NSString*)url;
 
 @end

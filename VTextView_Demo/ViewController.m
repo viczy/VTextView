@@ -23,7 +23,7 @@
 - (VTextView*)vTextView {
     if (!_vTextView) {
         _vTextView = [[VTextView alloc] initWithFrame:CGRectMake(0.f, 30.f, self.view.bounds.size.width, 200.f)];
-        _vTextView.editable = NO;
+        _vTextView.editable = YES;
         _vTextView.delegate = self;
         _vTextView.textImageMapping = [self getEmotionMap];
     }
@@ -53,10 +53,9 @@
 
 #pragma mark - VTextViewDelegate
 
-- (void)vTextView:(VTextView *)textView didSelectURL:(NSURL *)URL {
-    NSString *message = [URL absoluteString];
+- (void)vTextView:(VTextView *)textView didSelectUrl:(NSString *)url {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL"
-                                                    message:message
+                                                    message:url
                                                    delegate:nil
                                           cancelButtonTitle:@"确定"
                                           otherButtonTitles:nil];

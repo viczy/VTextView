@@ -96,6 +96,7 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 - (void)checkLinksForRange:(NSRange)range;
 - (NSTextCheckingResult*)linkAtIndex:(NSInteger)index;
 - (BOOL)selectedLinkAtIndex:(NSInteger)index;
+- (NSString*)linkStringAtIndex:(NSInteger)index;
 
 
 //NSAttributedstring <-> NSString
@@ -695,9 +696,9 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 
 - (void)setLinkRangeFromTextCheckerResults:(NSTextCheckingResult*)results {
     if (self.linkRange.length>0) {
-        BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectURL:)];
+        BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectUrl:)];
         if (respondUrl) {
-            [self.delegate vTextView:self didSelectURL:results.URL];
+            [self.delegate vTextView:self didSelectUrl:[results.URL absoluteString]];
         }
     }
     self.linkRange = NSMakeRange(NSNotFound, 0);
@@ -1004,6 +1005,8 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
         if (result.resultType == NSTextCheckingTypeRegularExpression) {
             NSRange subRange = [result rangeAtIndex:1];
             NSRange atRange = NSMakeRange(subRange.location-1, subRange.length+1);
+            NSString *atString = [attributedStr.string substringWithRange:atRange];
+            [linkAttributes setObject:atString forKey:vTextAttachmentLinkKey];
             [mutableAttributedString addAttributes:linkAttributes range:atRange];
         }
     }];
@@ -1017,6 +1020,9 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
             NSInteger regularCount = [regular numberOfMatchesInString:subString options:0 range:NSMakeRange(0, subString.length)];
             //如果regular不包含在regularAnother中，修改，否则跳过
             if (!regularCount > 0) {
+                NSString *atString = [attributedStr.string substringWithRange:atRange];
+                [linkAttributes setObject:atString forKey:vTextAttachmentLinkKey];
+                
                 [mutableAttributedString addAttributes:linkAttributes range:atRange];
             }
         }
@@ -1040,6 +1046,8 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
         if (result.resultType == NSTextCheckingTypeRegularExpression) {
             NSRange subRange = [result rangeAtIndex:1];
             NSRange topicRange = NSMakeRange(subRange.location-1, subRange.length+2);
+            NSString *topicString = [attributedStr.string substringWithRange:topicRange];
+            [linkAttributes setObject:topicString forKey:vTextAttachmentLinkKey];
             [mutableAttributedString addAttributes:linkAttributes range:topicRange];
         }
     }];
@@ -1062,7 +1070,10 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
                                      range:stringRange
                                 usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                                     if ([result resultType] == NSTextCheckingTypeLink) {
-                                        [mutableAttributedString addAttributes:linkAttributes range:[result range]];
+                                        NSRange httpRang = result.range;
+                                        NSString *httpString = [attributedStr.string substringWithRange:httpRang];
+                                        [linkAttributes setObject:httpString forKey:vTextAttachmentLinkKey];
+                                        [mutableAttributedString addAttributes:linkAttributes range:httpRang];
                                     }
                                 }];
 
@@ -1120,6 +1131,23 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
     }else {
         return NO;
     }
+}
+
+- (NSString*)linkStringAtIndex:(NSInteger)index {
+    __block NSString *linkString;
+    NSRange stringRange = NSMakeRange(0, self.attributedString.length);
+    [self.attributedString enumerateAttribute:vTextAttachmentLinkKey
+                                 inRange:stringRange
+                                 options:0
+                              usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                  if (value != nil) {
+                                      if (index >=range.location && index <= range.location+range.length) {
+                                          *stop = YES;
+                                          linkString = value;
+                                      }
+                                  }
+                              }];
+    return linkString;
 }
 
 #pragma mark - Menu
@@ -1385,13 +1413,17 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
     }
 
     NSInteger index = [self closestIndexToPoint:[gesture locationInView:self]];
-    BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectURL:)];
+    BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectUrl:)];
     if (respondUrl && !_editable) {
-        if ([self selectedLinkAtIndex:index]) {
-            NSTextCheckingResult *link = [self linkAtIndex:index];
-            [self setLinkRangeFromTextCheckerResults:link];
-            return;
+        NSString *linkString = [self linkStringAtIndex:index];
+        if (linkString.length > 0) {
+            [self.delegate vTextView:self didSelectUrl:linkString];
         }
+//        if ([self selectedLinkAtIndex:index]) {
+//            NSTextCheckingResult *link = [self linkAtIn- (void)vTextView:(VTextView*)textView didSelectUrl:(NSString*)urldex:index];
+//            [self setLinkRangeFromTextCheckerResults:link];
+//            return;
+//        }
     }
 
     UIMenuController *menuController = [UIMenuController sharedMenuController];
