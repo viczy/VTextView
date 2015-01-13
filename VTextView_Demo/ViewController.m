@@ -22,7 +22,7 @@
 - (VTextView*)vTextView {
     if (!_vTextView) {
         _vTextView = [[VTextView alloc] initWithFrame:CGRectMake(0.f, 30.f, self.view.bounds.size.width, 200.f)];
-        _vTextView.editable = NO;
+        _vTextView.editable = YES;
         _vTextView.textImageMapping = [self getEmotionMap];
     }
     return _vTextView;

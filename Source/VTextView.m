@@ -59,6 +59,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 
 @property (nonatomic, assign) BOOL editing;
 @property (nonatomic, assign) BOOL ignoreSelectionMenu;
+@property (nonatomic, assign) BOOL longPressLounpe;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) NSDictionary *defaultAttributes;
 @property (nonatomic, strong) NSMutableDictionary *currentAttributes;
@@ -502,6 +503,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 - (void)common {
     _editable = YES;
     _editing = NO;
+    _longPressLounpe = NO;
     _font = [UIFont systemFontOfSize:17];
     _autocorrectionType = UITextAutocorrectionTypeNo;
     _dataDetectorTypes = UIDataDetectorTypeLink;
@@ -666,7 +668,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
     }
     _ignoreSelectionMenu = NO;
 
-    if (self.selectedRange.length == 0) {
+    if (self.selectedRange.length == 0 || _longPressLounpe) {
         if (self.selectionView) {//so selection no getter
             [self.selectionView removeFromSuperview];
             self.selectionView=nil;
@@ -696,7 +698,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
             [self.caretView removeFromSuperview];
         }
 
-        if (self.selectionView==nil) {
+        if (!self.selectionView) {
             self.selectionView = [[VSelectionView alloc] initWithFrame:self.contentView.bounds];
             [self.contentView addSubview:self.selectionView];
         }
@@ -1333,6 +1335,7 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
             if ([self.inputDelegate respondsToSelector:@selector(selectionWillChange:)]) {
                 [self.inputDelegate selectionWillChange:self];
             }
+            _longPressLounpe = YES;
             self.selectedRange = range;
             if ([self.inputDelegate respondsToSelector:@selector(selectionDidChange:)]) {
                 [self.inputDelegate selectionDidChange:self];
@@ -1340,6 +1343,9 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
 
             CGPoint location = [gesture locationInView:self.textWindow];
             CGRect rect = CGRectMake(location.x, location.y, self.caretView.bounds.size.width, self.caretView.bounds.size.height);
+            if (_editable) {
+                rect.size = CGSizeMake(0.f, 0.f);
+            }
 
             if (gesture.state == UIGestureRecognizerStateBegan) {
                 [self.textWindow showFromView:self.contentView withRect:rect];
@@ -1348,6 +1354,11 @@ static CGFloat AttachmentRunDelegateGetWidth(void *refCon) {
             }
         }
     } else {
+        if (_longPressLounpe) {
+            _longPressLounpe = NO;
+            [self selectionChanged];
+        }
+        
         if (self.caretView) {
             [self.caretView animatedCaret];
         }
