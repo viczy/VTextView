@@ -44,6 +44,7 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 @property (nonatomic, strong) NSMutableDictionary *menuItemActions;
 @property (nonatomic, assign) NSRange correctionRange;
 @property (nonatomic, assign) NSRange linkRange;
+@property (nonatomic, strong) NSString *linkString;
 
 @property (nonatomic, strong) NSMutableAttributedString *mutableAttributeString;
 
@@ -56,8 +57,6 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 @property (nonatomic, strong) VCaretView *caretView; //no getter
 @property (nonatomic, strong) VSelectionView *selectionView; //no getter
 @property (nonatomic, strong) VTextWindow *textWindow;
-
-@property (nonatomic, strong) NSMutableArray *linkRangeArray;
 
 - (void)common;
 - (void)textChanged;
@@ -97,7 +96,6 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 - (NSTextCheckingResult*)linkAtIndex:(NSInteger)index;
 - (BOOL)selectedLinkAtIndex:(NSInteger)index;
 - (NSString*)linkStringAtIndex:(NSInteger)index;
-
 
 //NSAttributedstring <-> NSString
 - (NSAttributedString*)converStringToAttributedString:(NSString*)string;
@@ -357,6 +355,7 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 - (void)drawContentInRect:(CGRect)rect {
     UIColor *fillColor = [UIColor whiteColor];
     [fillColor setFill];
+    [[UIColor vSelectionColor] setFill];
     [self drawBoundingRangeAsSelection:self.linkRange cornerRadius:2.f];
     [[UIColor vSelectionColor] setFill];
     [self drawBoundingRangeAsSelection:self.selectedRange cornerRadius:0];
@@ -1143,6 +1142,7 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 
 - (NSString*)linkStringAtIndex:(NSInteger)index {
     __block NSString *linkString;
+    __weak typeof(self) weakSelf = self;
     NSRange stringRange = NSMakeRange(0, self.attributedString.length);
     [self.attributedString enumerateAttribute:vTextAttachmentLinkKey
                                  inRange:stringRange
@@ -1151,11 +1151,18 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
                                   if (value != nil) {
                                       if (index >=range.location && index <= range.location+range.length) {
                                           *stop = YES;
+                                          weakSelf.linkRange = range;
                                           linkString = value;
                                       }
                                   }
                               }];
     return linkString;
+}
+
+- (void)respondLink {
+    [self.delegate vTextView:self didSelectUrl:self.linkString];
+    self.linkString = nil;
+    self.linkRange = NSMakeRange(0, 0);
 }
 
 #pragma mark - Menu
@@ -1390,6 +1397,9 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 }
 
 - (void)doubleTap:(UITapGestureRecognizer*)gesture {
+    if (self.linkString.length > 0) {
+        return;
+    }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showMenu) object:nil];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showCorrectionMenu) object:nil];
     NSInteger index = [self closestIndexToPoint:[gesture locationInView:self]];
@@ -1407,7 +1417,7 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
         }
     }
 }
-//TODO:tap link背景效果
+
 - (void)tap:(UITapGestureRecognizer*)gesture {
     if (![self isFirstResponder]) {
         [self becomeFirstResponder];
@@ -1415,23 +1425,21 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showMenu) object:nil];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showCorrectionMenu) object:nil];
-    self.correctionRange = NSMakeRange(NSNotFound, 0);
-    if (self.selectedRange.length>0) {
-        self.selectedRange = NSMakeRange(self.selectedRange.location, 0);
-    }
 
     NSInteger index = [self closestIndexToPoint:[gesture locationInView:self]];
     BOOL respondUrl = [self.delegate respondsToSelector:@selector(vTextView:didSelectUrl:)];
-    if (respondUrl && !_editable) {
-        NSString *linkString = [self linkStringAtIndex:index];
-        if (linkString.length > 0) {
-            [self.delegate vTextView:self didSelectUrl:linkString];
+    if (!_editable && respondUrl && !self.selectedRange.length >0) {
+        self.linkString = [self linkStringAtIndex:index];
+        if (self.linkString.length > 0) {
+            [self.contentView setNeedsDisplay];
+            if (gesture.state == UIGestureRecognizerStateEnded) {
+                [self performSelector:@selector(respondLink) withObject:nil afterDelay:.5f];
+            }
         }
-//        if ([self selectedLinkAtIndex:index]) {
-//            NSTextCheckingResult *link = [self linkAtIn- (void)vTextView:(VTextView*)textView didSelectUrl:(NSString*)urldex:index];
-//            [self setLinkRangeFromTextCheckerResults:link];
-//            return;
-//        }
+    }
+    self.correctionRange = NSMakeRange(NSNotFound, 0);
+    if (self.selectedRange.length>0) {
+        self.selectedRange = NSMakeRange(self.selectedRange.location, 0);
     }
 
     UIMenuController *menuController = [UIMenuController sharedMenuController];
