@@ -1407,7 +1407,7 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
         }
     }
 }
-
+//TODO:tap link背景效果
 - (void)tap:(UITapGestureRecognizer*)gesture {
     if (![self isFirstResponder]) {
         [self becomeFirstResponder];
