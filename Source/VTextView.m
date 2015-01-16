@@ -1431,9 +1431,8 @@ static NSString *const vTextAttachmentLinkKey = @"com.everycode.vTextAttachmentL
     if (!_editable && respondUrl && !self.selectedRange.length >0) {
         self.linkString = [self linkStringAtIndex:index];
         if (self.linkString.length > 0) {
-            [self.contentView setNeedsDisplay];
             if (gesture.state == UIGestureRecognizerStateEnded) {
-                [self performSelector:@selector(respondLink) withObject:nil afterDelay:.5f];
+                [self performSelector:@selector(respondLink) withObject:nil afterDelay:.3f];
             }
         }
     }
