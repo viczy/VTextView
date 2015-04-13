@@ -6,7 +6,7 @@
 
 ###Demo
 
-`git clon https://github.com/viczy/VTextView.git`
+`git clone https://github.com/viczy/VTextView.git`
 
 ###Requirements
 
